@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title -->
+    <title>Class List</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Sortable CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js" integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+    <div class="table">
+
+        <div class="table-row">
+            <div class="heading">
+                <h1 style="color: grey;">MATHEMATICS</h1>
+            </div>
+        </div>
+        <hr style="border-color: grey; ">
+
+        <div class="table-row">
+            <div class="action-col">
+                <p style="font-weight: 700; font-size: 1.2rem;">Actions</p>
+                <p class="sub-title">Move, Indent,</p>
+                <p class="sub-title">Outdent, Delete</p>
+            </div>
+            <div class="list-col">
+                <p style="font-weight: 700; font-size: 1.2rem;">Standard</p>
+                <p class="sub-title">The text of the Standard</p>
+            </div>
+            <hr>
+        </div>
+
+
+        <div class="main-container">
+
+            <div class="table-row">
+                <div class="action-col">
+                    <i class="fa-solid fa-arrows-up-down-left-right"></i>
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                <div class="list-col">
+                    <input type='text' class='list-input list-col parent' name='newText' autocomplete='off'
+                        value='Example 1'>
+                </div>
+                <hr>
+            </div>
+
+        </div>
+
+        <form class="form-control" action="/" method="post">
+            <button type="submit" class="add-button" name="submit">Add Standard</button>
+            <!-- <input type="text" class="list-input list-col" name="newText"> -->
+        </form>
+
+
+    </div>
+
+
+    <script src="index.js"></script>
+</body>
+
+</html>
