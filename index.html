@@ -15,68 +15,111 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Sortable CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js" integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"
+        integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
         integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- css stylesheet -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/class-list.css">
 
 </head>
 
 <body>
 
-    <div class="table">
+    <main>
 
-        <div class="table-row">
-            <div class="heading">
-                <h1 style="color: grey;">MATHEMATICS</h1>
-            </div>
+        <h1>MATHEMATICS</h1>
+        <hr>
+        <div class="grid-column table-title">
+            <h3>Actions</h3>
+            <h3>Standard</h3>
+            <p class="action-subtitle">Move, Indent, Outdent, Delete</p>
+            <p class="action-subtitle">The text of the Standard</p>
         </div>
-        <hr style="border-color: grey; ">
-
-        <div class="table-row">
-            <div class="action-col">
-                <p style="font-weight: 700; font-size: 1.2rem;">Actions</p>
-                <p class="sub-title">Move, Indent,</p>
-                <p class="sub-title">Outdent, Delete</p>
-            </div>
-            <div class="list-col">
-                <p style="font-weight: 700; font-size: 1.2rem;">Standard</p>
-                <p class="sub-title">The text of the Standard</p>
-            </div>
-            <hr>
-        </div>
+        <hr>
 
 
-        <div class="main-container">
-
-            <div class="table-row">
-                <div class="action-col">
+        <div class="table">
+            <row id="row1" class="grid-column parent" draggable="true">
+                <div class="action-buttons">
                     <i class="fa-solid fa-arrows-up-down-left-right"></i>
                     <i class="fa-solid fa-arrow-left"></i>
                     <i class="fa-solid fa-arrow-right"></i>
                     <i class="fa-solid fa-trash"></i>
                 </div>
-                <div class="list-col">
-                    <input type='text' class='list-input list-col parent' name='newText' autocomplete='off'
-                        value='Example 1'>
-                </div>
-                <hr>
-            </div>
+                <input type='text' class='input' autocomplete='off' placeholder="Add Standard" spellcheck="false"
+                    value="Example 1">
+                <hr class="">
+            </row>
 
+            <row id="row2" class="grid-column child">
+                <div class="action-buttons">
+                    <i class="fa-solid fa-arrows-up-down-left-right"></i>
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                <input type='text' class='input' autocomplete='off' placeholder="Add Standard" spellcheck="false"
+                    value="Example 2">
+                <hr>
+            </row>
+
+            <row id="row3" class="grid-column grand-child">
+                <div class="action-buttons">
+                    <i class="fa-solid fa-arrows-up-down-left-right"></i>
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                <input type='text' class='input' autocomplete='off' placeholder="Add Standard" spellcheck="false"
+                    value="Example 3">
+                <hr>
+            </row>
+
+            <row id="row4" class="grid-column parent">
+                <div class="action-buttons">
+                    <i class="fa-solid fa-arrows-up-down-left-right"></i>
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                <input type='text' class='input' autocomplete='off' placeholder="Add Standard" spellcheck="false"
+                    value="Example 4">
+                <hr>
+            </row>
+
+            <row id="row5" class="grid-column grand-child">
+                <div class="action-buttons">
+                    <i class="fa-solid fa-arrows-up-down-left-right"></i>
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                <input type='text' class='input' autocomplete='off' placeholder="Add Standard" spellcheck="false"
+                    value="Example 5">
+                <hr>
+            </row>
         </div>
 
-        <form class="form-control" action="/" method="post">
-            <button type="submit" class="add-button" name="submit">Add Standard</button>
-            <!-- <input type="text" class="list-input list-col" name="newText"> -->
+
+
+
+        <div id="actions-div" class="hidden">
+            <i class="fa-solid fa-arrows-up-down-left-right"></i>
+            <i class="fa-solid fa-arrow-left"></i>
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-trash"></i>
+        </div>
+
+        <form action="" class="grid-column">
+            <button id="add-button" type="submit">Add Standard</button>
         </form>
-
-
-    </div>
-
+    </main>
 
     <script src="index.js"></script>
 </body>

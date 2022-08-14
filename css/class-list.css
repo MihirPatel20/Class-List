@@ -1,0 +1,201 @@
+:root {
+  --text-black-color: #2c3333;
+  --text-dark-color: #395b64;
+  --text-light-color: #a5c9ca;
+  --text-white-color: #e7f6f2;
+  --color-hover: #368aa1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin-top: 15vh;
+  display: flex;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+  background-color: var(--text-dark-color);
+}
+
+h1 {
+  font-size: clamp(1rem, 7vw, 3rem); 
+}
+
+main {
+  width: clamp(60vw, 70vw, 80vw);
+  padding: 25px;
+  border-radius: 7px;
+  background-color: var(--text-white-color);
+}
+
+row {
+  height: fit-content;
+  color: var(--text-dark-color);
+}
+
+i {
+  margin: 0;
+  padding: 3px;
+  cursor: pointer;
+}
+i:hover {
+  color: var(--color-hover);
+}
+
+hr {
+  grid-area: hr;
+  margin: 10px 0;
+  border: 0;
+  border-top: 1px solid rgb(170, 170, 170);
+}
+
+
+
+
+
+
+
+/* Class Styles */
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+}
+
+
+.grid-column {
+  display: grid;
+  grid-template-columns: clamp(110px, 12vw, 20vw) auto;
+  grid-template-areas:
+    "action-bubttons input"
+    "hr hr"
+    "add add";
+}
+
+.table {
+  background-color: var(--text-white-color);
+}
+
+
+
+
+/* Input bar styles */
+input[type="text"] {
+  grid-area: input;
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  background-color: transparent;
+  font-family: "Open Sans", sans-serif;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+.parent > input {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0077ff;
+}
+.child > input{
+  margin-left: 5vw;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: rgb(54, 54, 54);
+}
+.grand-child > input {
+  margin-left: 10vw;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: gray;
+}
+
+
+
+/* Add button styles */
+button[type="submit"] {
+  grid-area: add;
+  width: 100%;
+  padding: 10px 20px;
+  
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+
+  border: 0;
+  border-radius: 5px;
+  background: var(--text-dark-color);
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+}
+
+button[type="submit"]:hover {
+  background: var(--color-hover);
+  text-decoration: none;
+}
+
+
+
+/* size controller styles */
+.action-subtitle {
+  font-size: 0.6rem;
+  color: rgb(115, 115, 115);
+}
+
+
+.hidden {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 550px) {
+  
+  body {
+    margin-top: 10vh;
+  }
+
+  .grid-column {
+    grid-template-columns: clamp(90px, 12vw, 20vw) auto;
+    grid-template-areas:
+    "action input"
+    "hr hr"
+    "add add";
+  }
+  .fa-arrow-left {grid-area: left;}
+  .fa-arrow-right {grid-area: right;}
+  .fa-fa-arrows-up-down-left-right {grid-area: move;}
+  .fa-trash {grid-area: del;}
+  .action-buttons {
+    grid-area: action;
+    display: grid;
+    grid-template-columns: 25px 25px;
+    grid-template-areas:
+    "left right"
+    "move del";
+  }
+
+  input[type="text"] {
+    width: 100%;
+  }
+  .child > input{
+    width: 87%;
+  }
+  .grand-child > input {
+    width: 74.5%;
+  }
+}

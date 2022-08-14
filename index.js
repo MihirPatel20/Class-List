@@ -1,119 +1,144 @@
 //SELECTORS
-const addButton = document.querySelector('.add-button');
-const table = document.querySelector('.main-container');
+
+const table = document.querySelector('.table')
+const addButton = document.querySelector('#add-button')
+const actionsDiv = document.querySelector('#actions-div')
 
 
+//EVENT LISTENER
 
-
-//ADD EVENT LISTENER
-addButton.addEventListener('click', addList);
-table.addEventListener('click', applyAction);
-
+addButton.addEventListener('click', addNewRow)
+document.addEventListener('click', applyAction)
+document.addEventListener('mousedown', dragAndDrop)
 
 
 //FUNCTIONS
-function addList(event) {
+let counter = 6;
+
+function addNewRow(event) {
     event.preventDefault();
 
-    //New List-row Div
-    const newListDiv = document.createElement('div');
-    newListDiv.classList.add("table-row");
+    //Create new div for action-buttons
+    const newRow = document.createElement('row')
+    newRow.setAttribute('id', 'row' + counter)
+    newRow.classList.add('grid-column')
+    newRow.classList.add('parent')
 
-    //New Action section Div
-    const actionColumnDiv = document.createElement('div');
-    actionColumnDiv.classList.add("action-col");
-    actionColumnDiv.innerHTML = "<i class='fa-solid fa-arrows-up-down-left-right'></i> <i class='fa-solid fa-arrow-left'></i> <i class='fa-solid fa-arrow-right'></i> <i class='fa-solid fa-trash'></i>"
-    //Append new action section to List-row
-    newListDiv.appendChild(actionColumnDiv);
+    //Add Action buttons to new row
+    const newRowActions = document.createElement('div')
+    newRowActions.classList.add("action-buttons")
+    newRowActions.innerHTML = actionsDiv.innerHTML
+    newRow.appendChild(newRowActions)
 
-    //New List section Div
-    const listColumnDiv = document.createElement('div');
-    listColumnDiv.classList.add("list-col");
-    //create New input element to write standard
-    listColumnDiv.innerHTML = "<input type='text' class='list-input list-col parent' name='newText' autocomplete='off' value='' placeholder='Add Standard'>";
-    newListDiv.appendChild(listColumnDiv);
+    //New input text Element
+    const newRowInput = document.createElement("input")
+    //Add atributes to input element
+    newRowInput.setAttribute('autocomplete', 'off')
+    newRowInput.setAttribute('placeholder', 'Add Standard')
+    newRowInput.setAttribute('type', 'text')
+    newRowInput.setAttribute('spellcheck', 'false')
+    //Append Input emelent to new row
+    newRow.appendChild(newRowInput)
 
     //Add divider below wvwry new row to separate them
     const divider = document.createElement('hr')
     //Append new List section to List-row
-    newListDiv.appendChild(divider);
+    newRow.appendChild(divider);
+
+    //Append new row to main table
+    table.appendChild(newRow)
 
 
-    //Append New List-row to table
-    table.appendChild(newListDiv);
+    counter++;
 }
 
-function applyAction(e) {
-    const item = e.target
+function applyAction(event) {
 
-    const currentActionColumn = item.parentElement;
-    const currentListColumn = currentActionColumn.nextElementSibling;
-    const currentRow = currentActionColumn.parentElement;
-
+    const clickedElement = event.target;
+    const currentRowActions = clickedElement.parentElement;
+    const currentRow = currentRowActions.parentElement;
 
 
-    //delete list
-    if (item.classList[1] === "fa-trash") {
+    //Indent 
+    if (clickedElement.classList[1] === "fa-arrow-right") {
 
-        const currentRowInputElement = currentListColumn.firstElementChild;
-        const nextRow = currentRow.nextElementSibling;
-        const nextRowActionColumn = nextRow.firstElementChild;
-        const nextRowListColumn = nextRowActionColumn.nextElementSibling;
+        if (currentRow.classList[1] === 'grand-child') return;
 
-
-        if (currentRowInputElement.classList[2] === "parent") {
-            if (nextRowListColumn.classList[1] === "child-padding") {
-                nextRow.remove();
-            }
-        }
-        if (currentRowInputElement.classList[2] === "child") {
-            if (nextRowListColumn.classList[2] === "grand-child-padding") {
-                nextRow.remove();
-            }
+        else if (currentRow.classList[1] === 'child') {
+            currentRow.classList.remove('child')
+            currentRow.classList.add('grand-child')
         }
 
-        currentRow.remove();
+        else if (currentRow.classList[1] === 'parent') {
+            currentRow.classList.remove('parent')
+            currentRow.classList.add('child')
+        }
     }
 
-        //Indent List
-        if (item.classList[1] === "fa-arrow-right") {
-            const inputElement = currentListColumn.firstElementChild;
+    //Outdent
+    if (clickedElement.classList[1] === "fa-arrow-left") {
+        if (currentRow.classList[1] === 'parent') return;
 
-            if (inputElement.classList[2] === "parent") {
-                inputElement.classList.remove("parent")
-                inputElement.classList.add("child")
-                currentListColumn.classList.add("child-padding")
-            }
-            else if (inputElement.classList[2] === "child") {
-                inputElement.classList.remove("child")
-                inputElement.classList.add("grand-child")
-                currentListColumn.classList.add("grand-child-padding")
-            }
-
+        else if (currentRow.classList[1] === 'child') {
+            currentRow.classList.remove('child')
+            currentRow.classList.add('parent')
         }
 
-        //Outdent List
-        if (item.classList[1] === "fa-arrow-left") {
-            const inputElement = currentListColumn.firstElementChild;
-
-            if (inputElement.classList[2] === "grand-child") {
-                inputElement.classList.remove("grand-child")
-                inputElement.classList.add("child")
-                currentListColumn.classList.remove("grand-child-padding")
-            }
-            else if (inputElement.classList[2] === "child") {
-                inputElement.classList.remove("child")
-                inputElement.classList.add("parent")
-                currentListColumn.classList.remove("child-padding")
-            }
-
+        else if (currentRow.classList[1] === 'grand-child') {
+            currentRow.classList.remove('grand-child')
+            currentRow.classList.add('child')
         }
-
-        //Drag & Drop
-        if (item.classList[1] === "fa-arrows-up-down-left-right") {
-            new Sortable(table, {
-                Animation: 350
-            });
-        }
-
     }
+
+    //Delete
+    if (clickedElement.classList[1] === "fa-trash") {
+
+        let totalNumberOfRows = document.getElementsByTagName("row").length //4
+        let currentRowNumber;
+
+        for (j = 0; j < totalNumberOfRows; j++) {
+            let getRow = document.querySelectorAll('row')[j]
+
+            if (currentRow.getAttribute("id") === getRow.getAttribute("id")) {
+                currentRowNumber = j + 1;   //1,2,3,4,....
+            }
+        }
+
+        for (i = currentRowNumber; i <= totalNumberOfRows; i++) {   //clicked-row-number -> total rows
+            getRow = document.querySelectorAll('row')[i]
+            const nextRow = currentRow.nextElementSibling
+
+
+            if (currentRow.classList[1] === 'parent') {
+                if (nextRow === null) return currentRow.remove();
+                else if (nextRow.classList[1] !== 'parent') nextRow.remove();
+                else return currentRow.remove();
+            }
+
+            else if (currentRow.classList[1] === 'child') {
+                if (nextRow === null) return currentRow.remove();
+                else if (nextRow.classList[1] === 'grand-child') nextRow.remove();
+                else return currentRow.remove();
+            }
+
+            else if (currentRow.classList[1] === 'grand-child') return currentRow.remove();
+        }
+    }
+}
+
+
+//Drag & Drop
+function dragAndDrop(event) {
+
+    const clickedElement = event.target;
+    if (clickedElement.classList[1] === "fa-arrows-up-down-left-right") {
+        new Sortable(table, {
+            Animation: 1000
+        });
+    }
+}
+
+// new Sortable(table, {
+//     Animation: 300
+// });
+
